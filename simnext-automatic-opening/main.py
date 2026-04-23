@@ -1,9 +1,20 @@
-import pyautogui as pag
+import os
+import sys
 import time
+import pyautogui as pag
+
+def resourcePath(imagePath):
+    try:
+        basePath = sys._MEIPASS
+    except Exception:
+        basePath = os.path.abspath(".")
+    
+    return os.path.join(basePath, imagePath)
+
 
 #Variaveis de ambiente
-initTime = 10
-profileTime = 10
+initTime = 4
+profileTime = 5
 
 #Aguardando o computador inicializar
 print("==========================")
@@ -21,22 +32,24 @@ flagAction = True
 
 #Abertura da aba visualizacao
 try:
-    x1, y1 = pag.locateCenterOnScreen('images/visualizacao.png')
+    imagePath1 = resourcePath(os.path.join('images', 'visualizacao.png'))
+    x1, y1 = pag.locateCenterOnScreen(imagePath1, confidence=0.9)
     pag.doubleClick(x1, y1)
     print("Visualization tab open.")
     time.sleep(20)
-except FileNotFoundError:
-    print("Visualization button was not found.")
+except Exception as e:
+    print(f"Visualization button was not found {e}.")
     flagAction = False
 
 #Abertura do perfil de visualizacao
 try:
-    x2, y2 = pag.locateCenterOnScreen('images/botao-perfil.png')
+    imagePath2 = resourcePath(os.path.join('images', 'botao-perfil.png'))
+    x2, y2 = pag.locateCenterOnScreen(imagePath2, confidence=0.9)
     pag.doubleClick(x2, y2)
     print("Visualization profile open.")
     time.sleep(profileTime)
-except:
-    print("Profile button was not found.")
+except Exception:
+    print(f"Profile button was not found {e}.")
     flagAction = False
 
 #Ativando tela cheia
@@ -45,7 +58,11 @@ if flagAction:
     pag.rightClick(width/2 + 50, height/2)
     print("Opening fullscreen...")
     time.sleep(2)
-    x3, y3 = pag.locateCenterOnScreen('images/tela-cheia.png')
-    pag.click(x3, y3)
+    try:
+        imagePath3 = resourcePath(os.path.join('images','tela-cheia.png'))
+        x3, y3 = pag.locateCenterOnScreen(imagePath3, confidence=0.9)
+        pag.click(x3, y3)
+    except Exception as e:
+        print(f"Fullscreen button was not found {e}.")
 else:
     print("Without fullscreen activation.")
