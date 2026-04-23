@@ -19,7 +19,6 @@ except FileNotFoundError:
     print("Visualization button not found.")
     flagAction = False
 
-
 #Abertura do perfil de visualizacao
 try:
     x2, y2 = pag.locateCenterOnScreen('images/botao-perfil.png')
@@ -30,7 +29,6 @@ except:
     print("Profile button not found.")
     flagAction = False
 
-
 #Ativando tela cheia
 if flagAction:
     pag.rightClick(width/2, height/2)
@@ -39,5 +37,5 @@ if flagAction:
     x3, y3 = pag.locateCenterOnScreen('images/tela-cheia.png')
     pag.click(x3, y3)
 else:
-    print("Sem ativação de tela cheia.")
+    print("Without fullscreen activation.")
 
