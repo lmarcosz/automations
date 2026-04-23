@@ -46,7 +46,9 @@ if flagAction:
     try:
         imagePath2 = resourcePath(os.path.join('images', 'botao-perfil.png'))
         x2, y2 = pag.locateCenterOnScreen(imagePath2, confidence=0.8)
-        pag.doubleClick(x2, y2)
+        pag.moveTo(x2,y2)
+        pag.move(-80,0)
+        pag.doubleClick()
         print("Visualization profile open.")
         time.sleep(profileTime)
     except Exception as e:
