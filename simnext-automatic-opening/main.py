@@ -33,7 +33,7 @@ flagAction = True
 #Abertura da aba visualizacao
 try:
     imagePath1 = resourcePath(os.path.join('images', 'visualizacao.png'))
-    x1, y1 = pag.locateCenterOnScreen(imagePath1, confidence=0.9)
+    x1, y1 = pag.locateCenterOnScreen(imagePath1, confidence=0.8)
     pag.doubleClick(x1, y1)
     print("Visualization tab open.")
     time.sleep(20)
@@ -42,15 +42,16 @@ except Exception as e:
     flagAction = False
 
 #Abertura do perfil de visualizacao
-try:
-    imagePath2 = resourcePath(os.path.join('images', 'botao-perfil.png'))
-    x2, y2 = pag.locateCenterOnScreen(imagePath2, confidence=0.9)
-    pag.doubleClick(x2, y2)
-    print("Visualization profile open.")
-    time.sleep(profileTime)
-except Exception:
-    print(f"Profile button was not found {e}.")
-    flagAction = False
+if flagAction:
+    try:
+        imagePath2 = resourcePath(os.path.join('images', 'botao-perfil.png'))
+        x2, y2 = pag.locateCenterOnScreen(imagePath2, confidence=0.8)
+        pag.doubleClick(x2, y2)
+        print("Visualization profile open.")
+        time.sleep(profileTime)
+    except Exception as e:
+        print(f"Profile button was not found {e}.")
+        flagAction = False
 
 #Ativando tela cheia
 if flagAction:
@@ -60,7 +61,7 @@ if flagAction:
     time.sleep(2)
     try:
         imagePath3 = resourcePath(os.path.join('images','tela-cheia.png'))
-        x3, y3 = pag.locateCenterOnScreen(imagePath3, confidence=0.9)
+        x3, y3 = pag.locateCenterOnScreen(imagePath3, confidence=0.8)
         pag.click(x3, y3)
     except Exception as e:
         print(f"Fullscreen button was not found {e}.")
